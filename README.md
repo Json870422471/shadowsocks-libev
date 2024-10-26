@@ -1,3 +1,44 @@
+Ubuntu/Debian 安装
+
+```bash
+sudo apt update
+sudo apt install shadowsocks-libev
+
+
+sudo nano /etc/shadowsocks-libev/config.json
+
+{
+    "server": "0.0.0.0",
+    "server_port": 8388,
+    "local_address": "127.0.0.1",
+    "local_port": 1080,
+    "password": "your_password",
+    "timeout": 300,
+    "method": "chacha20-ietf-poly1305"
+}
+
+参数说明：
+
+server: 服务器 IP 地址，如果你是服务器端用户，设置为 0.0.0.0，表示监听所有 IP 地址；如果是客户端用户，需要填入实际的 Shadowsocks 服务器地址。
+server_port: 服务器端口，默认使用 8388。
+local_address: 本地代理的地址，通常设置为 127.0.0.1。
+local_port: 本地代理端口，通常为 1080，对应 Socks5 代理。
+password: 连接服务器的密码，必须与服务器端配置一致。
+timeout: 连接超时时间（秒），建议设置为 300。
+method: 加密方式，推荐使用 chacha20-ietf-poly1305。
+
+启动 Shadowsocks-libev
+sudo systemctl start shadowsocks-libev
+
+要确保服务开机自启，可以执行：
+sudo systemctl enable shadowsocks-libev
+
+验证 Shadowsocks 是否正常工作
+sudo systemctl status shadowsocks-libev
+
+
+
+
 # shadowsocks-libev
 
 [![Build Status](https://travis-ci.com/shadowsocks/shadowsocks-libev.svg?branch=master)](https://travis-ci.com/shadowsocks/shadowsocks-libev) [![Snap Status](https://snapcraft.io/shadowsocks-libev/badge.svg)](https://snapcraft.io/shadowsocks-libev)
